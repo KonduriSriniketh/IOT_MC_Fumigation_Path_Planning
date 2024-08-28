@@ -1,0 +1,19 @@
+<!-- -*- mode: XML -*- -->
+<launch>
+
+    <!-- ################ map server ################ -->
+    <!-- <node pkg="map_server" name="map_server" type="map_server" args="$(find astar)/maps/gmapping-005.yaml"/> -->
+    <node pkg="map_server" name="map_server" type="map_server" args="/home/sutd/Documents/fg_maps/linkbridge_lvl3_test.yaml"/>
+
+    <!-- ################ start astar node ################ -->
+    <node pkg="astar" type="astar_path_distances" name="astar_path_distances" output="screen">
+        <param name="Euclidean" value="true"/>
+        <param name="OccupyThresh" value="-1"/>
+        <param name="InflateRadius" value="0.35"/>
+        <param name="rate" value="10"/>
+    </node>
+
+    <!-- ################ start rviz ################ -->
+    <node pkg="rviz" type="rviz" name="rviz" args="-d $(find astar)/rviz/astar.rviz"/>
+
+</launch>
